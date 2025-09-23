@@ -1,8 +1,9 @@
 import java.util.Scanner;
 
 public class App {
+    private static Monster[] monsterParty;
     public static void main(String[] args) throws Exception {
-        private static Monster[] monsterParty;
+
 
         System.out.println("----- THE MONSTER PARTY BEGINS -----");
 
@@ -19,6 +20,11 @@ public class App {
         // HOW MANY MONSTERS HAVE >50 HEALTH???
         System.out.println(monsterCount(50, monsterParty) + " monsters have more than 50 hp! Egad!");
 
+        // WHAT IS THE PERCENT COMPLETION OF THE SLAUGHTER???
+        System.out.println("Current progress: " + percentComplete() + "%");
+
+        // DISPLAY THE STATUS OF THE MONSTERPARTY
+        reportMonsters();
     }
 
     /**
@@ -37,11 +43,45 @@ public class App {
 
     /**
      * Returns the next monster of the monster party.
-     * @return 
+     * @return The next monster that is still alive.
      */
     public static Monster getNextMonster() {
         for (int i = 0; i < monsterParty.length; i++) {
+            if (monsterParty[i].health() > 0) return monsterParty[i];
+        }
+        return null;
+    }
 
+    /**
+     * Returns the percent completion of the slaughter.
+     * @return Proportion of monsters already defeated.
+     */
+    public static double percentComplete() {
+        double fallen = monsterParty.length - monsterCount(0, monsterParty);
+        return (fallen / monsterParty.length) * 100;
+    }
+
+    /**
+     * Creates a report of all monsters, displaying their attributes.
+     */
+    public static void reportMonsters() {
+        System.out.println("\n----- THE OFFICIAL MONSTER REPORT -----");
+        for (int i = 0; i < monsterParty.length; i++) {
+            System.out.println("Monster " + (i + 1) + ":");
+            if (monsterParty[i].health() <= 0) {
+                System.out.println("Dead.");
+                continue;
+            }
+
+            System.out.print(monsterParty[i].health() + " hp, ");
+            System.out.print(monsterParty[i].damage() + " atk, ");
+            System.out.print(monsterParty[i].speed() + " spd. ");
+
+            if (monsterParty[i].special().equals("")) {
+                System.out.print("Normal monster.");
+            } else System.out.print("Elite ability: " + monsterParty[i].special());
+
+            System.out.println();
         }
     }
 }

@@ -23,9 +23,9 @@ public class Monster {
     }
 
     // ACCESSOR METHODS
-    public int health() {return this.health;}
-    public double damage() {return this.damage;}
-    public int speed() {return this.speed;}
-    public String special() {return this.special;}
+    public int health() { return this.health; }
+    public double damage() { return Math.round(this.damage * 10.0) / 10.0; }
+    public int speed() { return this.speed; }
+    public String special() { return this.special; }
     
 }
