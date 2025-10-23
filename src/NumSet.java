@@ -40,15 +40,14 @@ public class NumSet {
         divByTwo(randArrL);
         
         //sumArray
-        sumArray(randArray);
-        sumArray(randArrL);
+        System.out.println(sumArray(randArray));
+        System.out.println(sumArray(randArrL));
         
     }
     /*
     ROUND 1 code
     */
-    
-    // TODO: randArray
+
     public static int[] randArray(int length, int min, int max) {
         int[] result = new int[length];
         for (int i = 0; i < length; i++) {
@@ -57,7 +56,6 @@ public class NumSet {
         return result;
     }
 
-    // TODO: randArrL
     public static ArrayList<Integer> randArrL(int length, int min, int max) {
         ArrayList<Integer> result = new ArrayList<Integer>();
         for (int i = 0; i < length; i++) {
@@ -66,7 +64,6 @@ public class NumSet {
         return result;
     }
     
-    // TODO: compareNums
     public static int compareNums(int[] arr, ArrayList<Integer> arrL) {
         int count = 0;
         for (int i = 0; i < arr.length; i++) {
@@ -77,7 +74,6 @@ public class NumSet {
         return count;
     }
     
-    // TODO: printPretty (overloaded)
     public static void printPretty(int[] arr) {
         System.out.println("Printing array of length " + arr.length + ":");
         for (int num : arr) {
@@ -96,7 +92,6 @@ public class NumSet {
     ROUND 2 code
     */
     
-    // TODO: shuffle array
     public static void shuffle(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             // Pick new location
@@ -109,16 +104,52 @@ public class NumSet {
         printPretty(arr);
     }
     
-    // TODO: shuffle ArrayList
-        public static void shuffle(ArrayList<Integer> arrL) {
+    public static void shuffle(ArrayList<Integer> arrL) {
         for (int i = 0; i < arrL.size(); i++) {
-
+            int newIndex = (int)(Math.random() * arrL.size());
+            // Three-part-swap
+            int temp = arrL.get(newIndex);
+            arrL.set(newIndex, arrL.get(i));
+            arrL.set(i, temp);
         }
         printPretty(arrL);
     }
     
-    // TODO: divByTwo (overloaded)
+    /*
+     * For the sake of simplicity, divByTwo uses int math and runs printPretty at the end.
+     * There will be inaccuracies when odd numbers are in the array or ArrayList.
+     */
+    public static void divByTwo(int[] arr) {
+        int[] result = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            result[i] = arr[i] / 2;
+        }
+        printPretty(result);
+    }
+
+    public static void divByTwo(ArrayList<Integer> arrL) {
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        for (int i = 0; i < arrL.size(); i++) {
+            int half = arrL.get(i) / 2;
+            result.add(half);
+        }
+        printPretty(result);
+    }
     
-    
-    // TODO: sumArray (overloaded)
+    public static int sumArray(int[] arr) {
+        int total = 0;
+        for (int num : arr) {
+            total += num;
+        }
+        return total;
+    }
+
+    public static int sumArray(ArrayList<Integer> arrL) {
+        int total = 0;
+        for (int num : arrL) {
+            total += num;
+        }
+        return total;
+    }
+
 }
